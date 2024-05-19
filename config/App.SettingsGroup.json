@@ -1,0 +1,13 @@
+{
+    "version":      1,
+    "fileType":  "FactMetaData",
+    "QML.MetaData.Facts":
+[
+{
+    "name":             "appName",
+    "shortDesc": 	"appName",
+    "type":             "string",
+    "default":     	"QML Template"
+}
+]
+}

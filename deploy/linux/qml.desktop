@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=QMLTemplate
+GenericName=QMLTemplate
+Comment=QMLTemplate
+Icon=qml
+Exec=qml-start.sh
+Terminal=false
+Categories=Utility;

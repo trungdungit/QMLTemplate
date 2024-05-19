@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/qml">
+        <file alias="MainRootWindow.qml">UI/MainRootWindow.qml</file>
+    </qresource>
+    <qresource prefix="/json">
+        <file alias="App.SettingsGroup.json">config/App.SettingsGroup.json</file>
+        <file alias="Units.SettingsGroup.json">config/Units.SettingsGroup.json</file>
+    </qresource>
+</RCC>
