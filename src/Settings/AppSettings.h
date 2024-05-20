@@ -13,4 +13,5 @@ public:
     DEFINE_SETTING_NAME_GROUP()
 
     DEFINE_SETTINGFACT(appName)
+    DEFINE_SETTINGFACT(darkTheme)
 };

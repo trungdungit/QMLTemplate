@@ -14,10 +14,7 @@ import QtQuick.Dialogs  1.2
 import QtQuick.Layouts  1.2
 import QtQuick.Window   2.2
 
-import QGroundControl.Controls 1.0
-import QGroundControl.Palette 1.0
-import QGroundControl.Controllers 1.0
-import QGroundControl.ScreenTools 1.0
+import QMLTemplate.ScreenTools 1.0
 
 Item {
 

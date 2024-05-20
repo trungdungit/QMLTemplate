@@ -90,9 +90,7 @@ QMLApplication::~QMLApplication()
 
 void QMLApplication::_initCommon()
 {
-    static const char* kQMLTemplate = "QMLTemplate";
-
-    qmlRegisterSingletonType<QmlGlobal>(kQMLTemplate, 1, 0, kQMLTemplate, qmlGlobalSingletonFactory);
+    qmlRegisterSingletonType<QmlGlobal>("QMLTemplate", 1, 0, "QMLTemplate", qmlGlobalSingletonFactory);
 }
 
 bool QMLApplication::_initForNormalAppBoot()

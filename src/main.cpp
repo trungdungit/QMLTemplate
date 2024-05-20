@@ -3,8 +3,6 @@
 #include <QQuickStyle>
 #include <QQuickWindow>
 
-#include <iostream>
-
 #include "QMLApplication.h"
 #include "RunGuard.h"
 
@@ -167,7 +165,7 @@ int main(int argc, char *argv[])
     }
 
 #ifdef Q_OS_LINUX
-    QApplication::setWindowIcon(QIcon(":/res/resources/icons/qgroundcontrol.ico"));
+    QApplication::setWindowIcon(QIcon(":/res/icons/sample.ico"));
 #endif /* Q_OS_LINUX */
     app->_initCommon();
 

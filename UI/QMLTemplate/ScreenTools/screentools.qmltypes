@@ -1,0 +1,722 @@
+import QtQuick.tooling 1.2
+
+// This file describes the plugin-supplied types contained in the library.
+// It is used for QML tooling purposes only.
+Module {
+    dependencies: [
+            "QtGraphicalEffects 1.12",
+            "QtQml 2.14",
+            "QtQml.Models 2.2",
+            "QtQuick 2.9",
+            "QtQuick.Controls.Styles 1.4",
+            "QtQuick.Extras 1.4",
+            "QtQuick.Layouts 1.1",
+            "QtQuick.Window 2.2"
+        ]
+
+    Component {
+        prototype: "ScreenTools"
+        name: "QMLTemplate.ScreenTools/ScreenTools 1.0"
+        exports: ["QMLTemplate.ScreenTools/ScreenTools 1.0"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        Property {
+            name: "defaultFontPointSize"
+            type: "double"
+        }
+        Property {
+            name: "platformFontPointSize"
+            type: "double"
+        }
+        Property {
+            name: "defaultFontPixelHeight"
+            type: "double"
+        }
+        Property {
+            name: "defaultFontPixelWidth"
+            type: "double"
+        }
+        Property {
+            name: "maxToolbarHeight"
+            type: "double"
+        }
+        Property {
+            name: "smallFontPointSize"
+            type: "double"
+        }
+        Property {
+            name: "mediumFontPointSize"
+            type: "double"
+        }
+        Property {
+            name: "largeFontPointSize"
+            type: "double"
+        }
+        Property {
+            name: "toolbarHeight"
+            type: "double"
+        }
+        Property {
+            name: "smallSpacing"
+            type: "double"
+        }
+        Property {
+            name: "normalSpacing"
+            type: "double"
+        }
+        Property {
+            name: "mediumSpacing"
+            type: "double"
+        }
+        Property {
+            name: "largeSpacing"
+            type: "double"
+        }
+        Property {
+            name: "smallPadding"
+            type: "double"
+        }
+        Property {
+            name: "normalPadding"
+            type: "double"
+        }
+        Property {
+            name: "mediumPadding"
+            type: "double"
+        }
+        Property {
+            name: "largePadding"
+            type: "double"
+        }
+        Property {
+            name: "smallRadius"
+            type: "double"
+        }
+        Property {
+            name: "normalRadius"
+            type: "double"
+        }
+        Property {
+            name: "mediumRadius"
+            type: "double"
+        }
+        Property {
+            name: "largeRadius"
+            type: "double"
+        }
+        Property {
+            name: "smallWidthBorder"
+            type: "double"
+        }
+        Property {
+            name: "normalWidthBorder"
+            type: "double"
+        }
+        Property {
+            name: "mediumWidthBorder"
+            type: "double"
+        }
+        Property {
+            name: "largeWidthBorder"
+            type: "double"
+        }
+        Property {
+            name: "smallFontPointRatio"
+            type: "double"
+        }
+        Property {
+            name: "mediumFontPointRatio"
+            type: "double"
+        }
+        Property {
+            name: "largeFontPointRatio"
+            type: "double"
+        }
+        Property {
+            name: "implicitButtonWidth"
+            type: "double"
+        }
+        Property {
+            name: "implicitButtonHeight"
+            type: "double"
+        }
+        Property {
+            name: "implicitCheckBoxHeight"
+            type: "double"
+        }
+        Property {
+            name: "implicitRadioButtonHeight"
+            type: "double"
+        }
+        Property {
+            name: "implicitTextFieldHeight"
+            type: "double"
+        }
+        Property {
+            name: "implicitComboBoxHeight"
+            type: "double"
+        }
+        Property {
+            name: "implicitComboBoxWidth"
+            type: "double"
+        }
+        Property {
+            name: "comboBoxPadding"
+            type: "double"
+        }
+        Property {
+            name: "implicitSliderHeight"
+            type: "double"
+        }
+        Property {
+            name: "checkBoxIndicatorSize"
+            type: "double"
+        }
+        Property {
+            name: "radioButtonIndicatorSize"
+            type: "double"
+        }
+    }
+
+    Component {
+        prototype: "UIConstants"
+        name: "QMLTemplate.ScreenTools/UIConstants 1.0"
+        exports: ["QMLTemplate.ScreenTools/UIConstants 1.0"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        Property {
+            name: "darkTheme"
+            type: "bool"
+        }
+        Property {
+            name: "appAccent"
+            type: "integer"
+        }
+        Property {
+            name: "success"
+            type: "QColor"
+        }
+        Property {
+            name: "error"
+            type: "QColor"
+        }
+        Property {
+            name: "warning"
+            type: "QColor"
+        }
+        Property {
+            name: "info"
+            type: "QColor"
+        }
+        Property {
+            name: "iLinked"
+            type: "string"
+        }
+        Property {
+            name: "iUnlinked"
+            type: "string"
+        }
+        Property {
+            name: "iChecked"
+            type: "string"
+        }
+        Property {
+            name: "iError"
+            type: "string"
+        }
+        Property {
+            name: "iWarning"
+            type: "string"
+        }
+        Property {
+            name: "iInfo"
+            type: "string"
+        }
+        Property {
+            name: "iSuccess"
+            type: "string"
+        }
+        Property {
+            name: "iHomepage"
+            type: "string"
+        }
+        Property {
+            name: "iLiveView"
+            type: "string"
+        }
+        Property {
+            name: "iDeviceMgmt"
+            type: "string"
+        }
+        Property {
+            name: "iStranger"
+            type: "string"
+        }
+        Property {
+            name: "iPuzzlePiece"
+            type: "string"
+        }
+        Property {
+            name: "iGeneralConfigs"
+            type: "string"
+        }
+        Property {
+            name: "iClock"
+            type: "string"
+        }
+        Property {
+            name: "iKeyboard"
+            type: "string"
+        }
+        Property {
+            name: "iSync"
+            type: "string"
+        }
+        Property {
+            name: "iColumns"
+            type: "string"
+        }
+        Property {
+            name: "iCrosshairs"
+            type: "string"
+        }
+        Property {
+            name: "iFileDownload"
+            type: "string"
+        }
+        Property {
+            name: "iFileUpload"
+            type: "string"
+        }
+        Property {
+            name: "iAlert"
+            type: "string"
+        }
+        Property {
+            name: "iAlgorithm"
+            type: "string"
+        }
+        Property {
+            name: "iCamera"
+            type: "string"
+        }
+        Property {
+            name: "iCaretLeft"
+            type: "string"
+        }
+        Property {
+            name: "iCaretRight"
+            type: "string"
+        }
+        Property {
+            name: "iComDisk"
+            type: "string"
+        }
+        Property {
+            name: "iEdit"
+            type: "string"
+        }
+        Property {
+            name: "iDevice"
+            type: "string"
+        }
+        Property {
+            name: "iList"
+            type: "string"
+        }
+        Property {
+            name: "ivList"
+            type: "string"
+        }
+        Property {
+            name: "iTools"
+            type: "string"
+        }
+        Property {
+            name: "iSignal"
+            type: "string"
+        }
+        Property {
+            name: "iSearch"
+            type: "string"
+        }
+        Property {
+            name: "iSpaceShuttle"
+            type: "string"
+        }
+        Property {
+            name: "iSliders"
+            type: "string"
+        }
+        Property {
+            name: "iUpload"
+            type: "string"
+        }
+        Property {
+            name: "iVoiceControl"
+            type: "string"
+        }
+        Property {
+            name: "iX"
+            type: "string"
+        }
+        Property {
+            name: "iRedo"
+            type: "string"
+        }
+        Property {
+            name: "iRestart"
+            type: "string"
+        }
+        Property {
+            name: "iPlayState"
+            type: "string"
+        }
+        Property {
+            name: "iStopState"
+            type: "string"
+        }
+        Property {
+            name: "iCaretDown"
+            type: "string"
+        }
+        Property {
+            name: "iCaretUp"
+            type: "string"
+        }
+        Property {
+            name: "iChevronLeft"
+            type: "string"
+        }
+        Property {
+            name: "iChevronRight"
+            type: "string"
+        }
+        Property {
+            name: "iChevronFirstLeft"
+            type: "string"
+        }
+        Property {
+            name: "iChevronLastRight"
+            type: "string"
+        }
+        Property {
+            name: "iArrowLeft"
+            type: "string"
+        }
+        Property {
+            name: "iArrowRight"
+            type: "string"
+        }
+        Property {
+            name: "iExport"
+            type: "string"
+        }
+        Property {
+            name: "iFolder"
+            type: "string"
+        }
+        Property {
+            name: "iTrash"
+            type: "string"
+        }
+        Property {
+            name: "iEye"
+            type: "string"
+        }
+        Property {
+            name: "iEyeSlash"
+            type: "string"
+        }
+        Property {
+            name: "iUserPlus"
+            type: "string"
+        }
+        Property {
+            name: "iUserMinus"
+            type: "string"
+        }
+        Property {
+            name: "iCircleChecked"
+            type: "string"
+        }
+        Property {
+            name: "iXChecked"
+            type: "string"
+        }
+        Property {
+            name: "iCalendar"
+            type: "string"
+        }
+        Property {
+            name: "iSettings"
+            type: "string"
+        }
+        Property {
+            name: "iSave"
+            type: "string"
+        }
+        Property {
+            name: "iCommon"
+            type: "string"
+        }
+        Property {
+            name: "iStream"
+            type: "string"
+        }
+        Property {
+            name: "iSequenceTasks"
+            type: "string"
+        }
+        Property {
+            name: "iUsers"
+            type: "string"
+        }
+        Property {
+            name: "iReturnScreen"
+            type: "string"
+        }
+        Property {
+            name: "iOpenFullScreen"
+            type: "string"
+        }
+        Property {
+            name: "iRefresh"
+            type: "string"
+        }
+        Property {
+            name: "iDelete"
+            type: "string"
+        }
+        Property {
+            name: "iAdd"
+            type: "string"
+        }
+        Property {
+            name: "iChartLine"
+            type: "string"
+        }
+        Property {
+            name: "iReset"
+            type: "string"
+        }
+        Property {
+            name: "redColor"
+            type: "QColor"
+        }
+        Property {
+            name: "blackColor"
+            type: "QColor"
+        }
+        Property {
+            name: "whiteColor"
+            type: "QColor"
+        }
+        Property {
+            name: "textColor"
+            type: "QColor"
+        }
+        Property {
+            name: "textFooterColor"
+            type: "QColor"
+        }
+        Property {
+            name: "textBlueColor"
+            type: "QColor"
+        }
+        Property {
+            name: "textSideBarColor"
+            type: "QColor"
+        }
+        Property {
+            name: "tableHeaderColor"
+            type: "QColor"
+        }
+        Property {
+            name: "textSideActive"
+            type: "QColor"
+        }
+        Property {
+            name: "textBtnColor"
+            type: "QColor"
+        }
+        Property {
+            name: "btnCateColor"
+            type: "QColor"
+        }
+        Property {
+            name: "btnCancelColor"
+            type: "QColor"
+        }
+        Property {
+            name: "btnActiveColor"
+            type: "QColor"
+        }
+        Property {
+            name: "btnDeleteColor"
+            type: "QColor"
+        }
+        Property {
+            name: "btnRestartColor"
+            type: "QColor"
+        }
+        Property {
+            name: "btnSaveColor"
+            type: "QColor"
+        }
+        Property {
+            name: "dropshadowColor"
+            type: "QColor"
+        }
+        Property {
+            name: "sidebarBorderColor"
+            type: "QColor"
+        }
+        Property {
+            name: "borderBlue"
+            type: "QColor"
+        }
+        Property {
+            name: "bgColorOverlay"
+            type: "QColor"
+        }
+        Property {
+            name: "cfProcessingOverlayBg"
+            type: "QColor"
+        }
+        Property {
+            name: "sidebarConfigBg"
+            type: "QColor"
+        }
+        Property {
+            name: "sidebarActiveBg"
+            type: "QColor"
+        }
+        Property {
+            name: "sidebarBgItemLevel2"
+            type: "QColor"
+        }
+        Property {
+            name: "sectionBg"
+            type: "QColor"
+        }
+        Property {
+            name: "titleColorOverlay"
+            type: "QColor"
+        }
+        Property {
+            name: "sectionHeader"
+            type: "QColor"
+        }
+        Property {
+            name: "categoryEleBgColor"
+            type: "QColor"
+        }
+        Property {
+            name: "categoryEleActiveColor"
+            type: "QColor"
+        }
+        Property {
+            name: "presentColor"
+            type: "QColor"
+        }
+        Property {
+            name: "absentColor"
+            type: "QColor"
+        }
+        Property {
+            name: "recordIconBg"
+            type: "QColor"
+        }
+        Property {
+            name: "genBorderColor"
+            type: "QColor"
+        }
+        Property {
+            name: "vibrantGreen"
+            type: "QColor"
+        }
+        Property {
+            name: "orangeRed"
+            type: "QColor"
+        }
+        Property {
+            name: "neutral"
+            type: "QColor"
+        }
+        Property {
+            name: "goldColor"
+            type: "QColor"
+        }
+        Property {
+            name: "green"
+            type: "QColor"
+        }
+        Property {
+            name: "grayish"
+            type: "QColor"
+        }
+        Property {
+            name: "grayShape"
+            type: "QColor"
+        }
+        Property {
+            name: "recordIconColor"
+            type: "QColor"
+        }
+        Property {
+            name: "grayColor"
+            type: "QColor"
+        }
+        Property {
+            name: "darkGrayColor"
+            type: "QColor"
+        }
+        Property {
+            name: "transparentColor"
+            type: "QColor"
+        }
+        Property {
+            name: "fontComicSans"
+            type: "string"
+        }
+        Property {
+            name: "fontMonospace"
+            type: "string"
+        }
+        Property {
+            name: "fontNunito"
+            type: "string"
+        }
+        Property {
+            name: "customFont"
+            type: "string"
+        }
+        Property {
+            name: "textFont"
+            type: "string"
+        }
+        Property {
+            name: "secondaryTextFont"
+            type: "string"
+        }
+    }
+    Component {
+        prototype: "RegExpTools"
+        name: "QMLTemplate.ScreenTools/RegExpTools 1.0"
+        exports: ["QMLTemplate.ScreenTools/RegExpTools 1.0"]
+        exportMetaObjectRevisions: [0]
+        isComposite: true
+        Property { name: "emailValidate"; type: "QValidator" }
+	Property { name: "isoTimeValidate"; type: "QValidator" }
+        Property { name: "ptTimeValidate"; type: "QValidator" }
+        Property { name: "cronTabValidator"; type: "QValidator" }
+        Property { name: "ipAddressValidate"; type: "QValidator" }
+        Property { name: "portValidate"; type: "QValidator" }
+        Property { name: "stringValidate"; type: "QValidator" }
+        Property { name: "integerValidate"; type: "QValidator" }
+        Property { name: "hourValidate"; type: "QValidator" }
+        Property { name: "minuteValidate"; type: "QValidator" }
+        Property { name: "fullHourValidate"; type: "QValidator" }
+    }
+}

@@ -130,19 +130,28 @@ find_package(Qt5
         ${QT_LIBRARY_HINTS}
 )
 
-# this is required since user can have Qt5 and Qt6 installed at the same time, and then Qt_DIR
-# might point to Qt5, but we want to use Qt6
-# especially qmdnsengine uses Qt_DIR to choose Qt version
-if (Qt5_DIR)
-    set(QT_DIR ${Qt5_DIR})
-endif ()
+#######################################################
+#                Options
+#######################################################
+
+cmake_dependent_option(QML_BUILD_TESTING "Enable testing" ON "CMAKE_BUILD_TYPE STREQUAL Debug" OFF)
+if(QML_BUILD_TESTING)
+    add_compile_definitions(UNITTEST_BUILD)
+endif()
+
+cmake_dependent_option(QML_DEBUG_QML "Build TemplateProject with QML debugging/profiling support." OFF "CMAKE_BUILD_TYPE STREQUAL Debug" OFF)
+if(QML_DEBUG_QML)
+    message(STATUS "To enable the QML debugger/profiler, run with: '-qmljsdebugger=port:1234'")
+    add_compile_definitions(QT_QML_DEBUG)
+endif()
 
 #######################################################
-#                QGroundControl Resources
+#                Resources
 #######################################################
 
 set(QML_RESOURCES
     ${CMAKE_SOURCE_DIR}/qmltemplate.qrc
+    ${CMAKE_SOURCE_DIR}/resources.qrc
 )
 
 if(QML_BUILD_TESTING)
@@ -240,3 +249,7 @@ install(
     BUNDLE  DESTINATION .
 )
 
+install(
+    DIRECTORY ${CMAKE_SOURCE_DIR}/resources/
+    DESTINATION ${CMAKE_INSTALL_DATADIR}/TemplateProject
+)

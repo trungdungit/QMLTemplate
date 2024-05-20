@@ -22,3 +22,5 @@ DECLARE_SETTINGGROUP(App, "")
 }
 
 DECLARE_SETTINGSFACT(AppSettings, appName)
+DECLARE_SETTINGSFACT(AppSettings, darkTheme)
+

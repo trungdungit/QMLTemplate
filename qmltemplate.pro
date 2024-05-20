@@ -16,9 +16,8 @@ include(QMLCommon.pri)
 
 TARGET = QMLTemplate
 TEMPLATE = app
-QMLROOT = $$PWD
 
-QML_IMPORT_PATH += $$PWD
+QML_IMPORT_PATH += $$PWD/UI
 
 MacBuild {
 }
@@ -77,6 +76,7 @@ DEFINES += QML_ORG_NAME=\"\\\"qmltemplate.org\\\"\"
 DEFINES += QML_ORG_DOMAIN=\"\\\"org.qmltemplate\\\"\"
 RESOURCES += \
     $$PWD/qmltemplate.qrc \
+    $$PWD/resources.qrc \
 
 #
 # DeviceManager

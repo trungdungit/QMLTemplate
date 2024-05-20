@@ -1,0 +1,6 @@
+module QMLTemplate.ScreenTools
+typeinfo screentools.qmltypes
+
+singleton ScreenTools 1.0 ScreenTools.qml
+singleton UIConstants 1.0 UIConstants.qml
+singleton RegExpTools 1.0 RegExpTools.qml
