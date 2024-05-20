@@ -1,7 +1,6 @@
 add_library(DeviceManagerTest
 	STATIC
-		DeviceManagerTest.cc 
-		DeviceManagerTest.h
+		DeviceManagerTest.cpp 
 )
 
 target_link_libraries(DeviceManagerTest

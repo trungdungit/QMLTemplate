@@ -46,13 +46,13 @@ QMLCorePlugin::~QMLCorePlugin()
 QMLCorePlugin::QMLCorePlugin(QMLApplication *app, QMLToolbox* toolbox)
     : QMLTool(app, toolbox)
 {
-    QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
     _p = new QMLCorePlugin_p;
 }
 
 void QMLCorePlugin::setToolbox(QMLToolbox *toolbox)
 {
     QMLTool::setToolbox(toolbox);
+    QQmlEngine::setObjectOwnership(this, QQmlEngine::CppOwnership);
 
     qmlRegisterUncreatableType<QMLCorePlugin>       ("QMLTemplate", 1, 0, "QMLCorePlugin",       "Reference only");
     qmlRegisterUncreatableType<QMLOptions>          ("QMLTemplate", 1, 0, "QMLOptions",          "Reference only");

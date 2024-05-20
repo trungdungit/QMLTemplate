@@ -2,7 +2,6 @@ find_package(Qt5 REQUIRED COMPONENTS Core)
 
 add_library(DeviceManager STATIC
 	DeviceManager.cpp
-	DeviceManager.h
 )
 
 target_link_libraries(DeviceManager

@@ -118,24 +118,14 @@ endif()
 find_package(Qt5
     REQUIRED
     COMPONENTS
-        Charts
-        Concurrent
         Core
         Location
-        Multimedia
-        Network
-        Positioning
         Quick
         QuickControls2
         QuickWidgets
         OpenGL
-        Svg
         Test
-        TextToSpeech
         Widgets
-    OPTIONAL_COMPONENTS
-        LinguistTools
-        SerialPort
     HINTS
         ${QT_LIBRARY_HINTS}
 )

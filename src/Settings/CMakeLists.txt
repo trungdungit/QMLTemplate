@@ -2,13 +2,9 @@ find_package(Qt5 REQUIRED COMPONENTS Core)
 
 add_library(Settings STATIC
 	AppSettings.cpp
-	AppSettings.h
 	UnitsSettings.cpp
-	UnitsSettings.h
 	SettingsGroup.cpp
-	SettingsGroup.h
 	SettingsManager.cpp
-	SettingsManager.h
 )
 
 target_link_libraries(Settings

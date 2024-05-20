@@ -1,7 +1,6 @@
 #include "QMLApplication.h"
 #include "QmlGlobal.h"
 #include "CmdLineOptParser.h"
-#include "SettingsManager.h"
 #include "QMLCorePlugin.h"
 
 QMLApplication* QMLApplication::_app = nullptr;
@@ -91,10 +90,7 @@ QMLApplication::~QMLApplication()
 
 void QMLApplication::_initCommon()
 {
-    static const char* kRefOnly     = "Reference only";
     static const char* kQMLTemplate = "QMLTemplate";
-
-    qmlRegisterUncreatableType<DeviceManager>(kQMLTemplate, 1, 0, "DeviceManager", kRefOnly);
 
     qmlRegisterSingletonType<QmlGlobal>(kQMLTemplate, 1, 0, kQMLTemplate, qmlGlobalSingletonFactory);
 }

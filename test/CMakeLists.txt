@@ -19,16 +19,11 @@ if (QML_BUILD_TESTING)
     endfunction()
 
     add_subdirectory(DeviceManager)
-    add_subdirectory(FactSystem)
-    add_subdirectory(qmlunittest)
-    add_subdirectory(QmlControls)
-    
+    add_subdirectory(qmlunittest)   
 
     target_link_libraries(qmltest
         PUBLIC
             DeviceManagerTest
-            FactSystemTest
             qmlunittest
-            QmlControlsTest
     )
 endif ()

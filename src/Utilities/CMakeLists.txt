@@ -2,11 +2,8 @@ find_package(Qt5 REQUIRED COMPONENTS Core Network Positioning Qml)
 
 add_library(Utilities STATIC
     JsonHelper.cpp
-    JsonHelper.h
     QML.cpp
-    QML.h
     QMLLoggingCategory.cpp
-    QMLLoggingCategory.h
 )
 
 if(MOBILE)
