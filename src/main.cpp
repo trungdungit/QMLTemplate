@@ -4,10 +4,11 @@
 #include <QQuickWindow>
 
 #include "QMLApplication.h"
+#include "QML.h"
 #include "RunGuard.h"
 
 #ifdef UNITTEST_BUILD
-#include "UnitTest.h"
+#include "UnitTestList.h"
 #endif
 
 #ifdef QT_DEBUG
@@ -74,6 +75,8 @@ int main(int argc, char *argv[])
         return -1;
     }
 #endif
+    // Record boot timer
+    QML::initTimer();
 
 #ifdef Q_OS_MAC
 #ifndef Q_OS_IOS
@@ -104,7 +107,6 @@ int main(int argc, char *argv[])
     std::signal(SIGINT, sigHandler);
     std::signal(SIGTERM, sigHandler);
 #endif /* Q_OS_LINUX */
-
 
 // We statically link our own QtLocation plugin
 
@@ -173,22 +175,7 @@ int main(int argc, char *argv[])
 
 #ifdef UNITTEST_BUILD
     if (runUnitTests) {
-        for (int i=0; i < (stressUnitTests ? 20 : 1); i++) {
-            if (!app->_initForUnitTests()) {
-                return -1;
-            }
-
-            // Run the test
-            int failures = UnitTest::run(unitTestOptions);
-            if (failures == 0) {
-                qDebug() << "ALL TESTS PASSED";
-                exitCode = 0;
-            } else {
-                qDebug() << failures << " TESTS FAILED!";
-                exitCode = -failures;
-                break;
-            }
-        }
+        exitCode = runTests(stressUnitTests, unitTestOptions);
     } else
 #endif
     {
@@ -204,8 +191,6 @@ int main(int argc, char *argv[])
     }
 
     app->_shutdown();
-    delete app;
     qDebug() << "After app delete";
-
     return exitCode;
 }

@@ -20,4 +20,8 @@ ApplicationWindow {
         height: 200
         color: UIConstants.recordIconBg
     }
+
+    Component.onCompleted: {
+        console.log("Main Window")
+    }
 }

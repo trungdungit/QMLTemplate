@@ -8,18 +8,16 @@
 #define UT_REGISTER_TEST(className)             static UnitTestWrapper<className> className(#className, false);
 #define UT_REGISTER_TEST_STANDALONE(className)  static UnitTestWrapper<className> className(#className, true);  // Test will only be run with specifically called to from command line
 
-
 class UnitTest : public QObject
 {
     Q_OBJECT
-
 public:
     UnitTest(void);
     virtual ~UnitTest(void);
 
     /// @brief Called to run all the registered unit tests
     ///     @param singleTest Name of test to just run a single test
-    static int run(QString& singleTest);
+    static int run(QStringView& singleTest);
 
     bool standalone(void) const{ return _standalone; }
     void setStandalone(bool standalone) { _standalone = standalone; }

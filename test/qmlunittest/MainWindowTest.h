@@ -2,16 +2,16 @@
 
 #include "UnitTest.h"
 
-class DeviceManagerTest : public UnitTest {
+class MainWindowTest : public UnitTest {
     Q_OBJECT
 public:
-    DeviceManagerTest(void);
+    MainWindowTest(void);
 
 protected:
     void init(void) final;
     void cleanup(void) final;
 
 private slots:
-    void device_test();
+    void showWindow_test();
 };
 

@@ -49,7 +49,7 @@ QList<UnitTest*>& UnitTest::_testList(void)
     return tests;
 }
 
-int UnitTest::run(QString& singleTest)
+int UnitTest::run(QStringView& singleTest)
 {
     int ret = 0;
 

@@ -10,5 +10,10 @@ void DeviceManagerTest::init(void) {
 }
 
 void DeviceManagerTest::cleanup(void) {
+    UnitTest::cleanup();
+}
 
+void DeviceManagerTest::device_test()
+{
+    qDebug() << "Device test successfully";
 }

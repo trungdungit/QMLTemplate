@@ -1,6 +1,7 @@
 add_library(qmlunittest
 	STATIC
 		UnitTest.cpp
+		MainWindowTest.cpp
 )
 
 target_link_libraries(qmlunittest

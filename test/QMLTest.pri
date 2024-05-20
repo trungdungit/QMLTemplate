@@ -9,12 +9,18 @@ ReleaseBuild {
     INCLUDEPATH += \
         $$PWD/DeviceManager \
         $$PWD/qmlunittest \
+        $$PWD \
 
     HEADERS += \
         $$PWD/DeviceManager/DeviceManagerTest.h \
         $$PWD/qmlunittest/UnitTest.h \
+        $$PWD/qmlunittest/MainWindowTest.h \
+        $$PWD/UnitTestList.h \
 
     SOURCES += \
         $$PWD/DeviceManager/DeviceManagerTest.cpp \
         $$PWD/qmlunittest/UnitTest.cpp \
+        $$PWD/qmlunittest/MainWindowTest.cpp \
+        $$PWD/UnitTestList.cpp \
+
 }

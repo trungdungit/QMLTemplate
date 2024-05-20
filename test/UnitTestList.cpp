@@ -1,12 +1,29 @@
+#include "UnitTestList.h"
+#include "UnitTest.h"
+#include "QMLApplication.h"
+
 #include "DeviceManagerTest.h"
+#include "MainWindowTest.h"
 
-UT_REGISTER_TEST(DeviceManagerTest)
+int runTests(bool stress, QStringView unitTestOptions)
+{
+    UT_REGISTER_TEST(DeviceManagerTest)
+    UT_REGISTER_TEST(MainWindowTest)
 
-// List of unit test which are currently disabled.
-// If disabling a new test, include reason in comment.
+    int result = 0;
 
-// FIXME: Temporarily disabled until this can be stabilized
-//UT_REGISTER_TEST(MainWindowTest)
+    for (int i=0; i < (stress ? 20 : 1); i++) {
+        // Run the test
+        const int failures = UnitTest::run(unitTestOptions);
+        if (failures == 0) {
+            qDebug() << "ALL TESTS PASSED";
+            result = 0;
+        } else {
+            qDebug() << failures << " TESTS FAILED!";
+            result = -failures;
+            break;
+        }
+    }
 
-// Needs to be update for latest updates
-//UT_REGISTER_TEST(MavlinkLogTest)
+    return result;
+}
