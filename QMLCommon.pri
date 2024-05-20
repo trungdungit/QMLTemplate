@@ -51,25 +51,16 @@ linux {
         error("Unsuported Linux toolchain, only GCC 32- or 64-bit is supported")
     }
 } else : win32 {
-    contains(QMAKE_TARGET.arch, x86_64) {
-        message("Windows build")
-        CONFIG += WindowsBuild
-        DEFINES += __STDC_LIMIT_MACROS
-        DEFINES += __STDC_CONSTANT_MACROS
-        QMAKE_CFLAGS -= -Zc:strictStrings
-        QMAKE_CFLAGS_RELEASE -= -Zc:strictStrings
-        QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO -= -Zc:strictStrings
-        QMAKE_CXXFLAGS -= -Zc:strictStrings
-        QMAKE_CXXFLAGS_RELEASE -= -Zc:strictStrings
-        QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO -= -Zc:strictStrings
-        QMAKE_CXXFLAGS_WARN_ON += /WX /W3 \
-            /wd4005 \   # silence warnings about macro redefinition, these come from the shapefile code with is external
-            /wd4290 \   # ignore exception specifications
-            /wd4267 \   # silence conversion from 'size_t' to 'int', possible loss of data, these come from gps drivers shared with px4
-            /wd4100     # unreferenced formal parameter - gst-plugins-good
-    } else {
-        error("Unsupported Windows toolchain, only Visual Studio 2017 64 bit is supported")
-    }
+    message("Windows build")
+    CONFIG += WindowsBuild
+    DEFINES += __STDC_LIMIT_MACROS
+    DEFINES += __STDC_CONSTANT_MACROS
+    QMAKE_CFLAGS -= -Zc:strictStrings
+    QMAKE_CFLAGS_RELEASE -= -Zc:strictStrings
+    QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO -= -Zc:strictStrings
+    QMAKE_CXXFLAGS -= -Zc:strictStrings
+    QMAKE_CXXFLAGS_RELEASE -= -Zc:strictStrings
+    QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO -= -Zc:strictStrings
 } else : macx {
     macx-clang | macx-llvm {
         message("Mac build")

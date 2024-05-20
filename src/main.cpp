@@ -18,6 +18,8 @@
 #ifdef Q_OS_WIN
 
 #include <windows.h>
+#include <iostream>
+#include <crtdbg.h>
 
 /// @brief CRT Report Hook installed using _CrtSetReportHook. We install this hook when
 /// we don't want asserts to pop a dialog on windows.
@@ -87,9 +89,6 @@ int main(int argc, char *argv[])
 #endif
 
 #ifdef Q_OS_WIN
-    // Set our own OpenGL buglist
-    qputenv("QT_OPENGL_BUGLIST", ":/opengl/resources/opengl/buglist.json");
-
     // Allow for command line override of renderer
     for (int i = 0; i < argc; i++) {
         const QString arg(argv[i]);

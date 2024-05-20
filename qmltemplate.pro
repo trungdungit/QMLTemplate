@@ -51,23 +51,14 @@ CONFIG += qt thread silent
 CONFIG -= qtquickcompiler
 
 QT += \
-    concurrent \
-    gui \
     location \
-    network \
-    opengl \
     positioning \
+    gui \
     qml \
     quick \
     quickcontrols2 \
     quickwidgets \
-    sql \
-    svg \
     widgets \
-    xml \
-    texttospeech \
-    core-private \
-    quick3d
 
 include(QMLExternalLibs.pri)
 

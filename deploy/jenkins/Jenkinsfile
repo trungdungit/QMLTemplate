@@ -102,6 +102,50 @@ pipeline {
           }
         }
 
+        stage('Windows build (qmake)') {
+          environment {
+            CCACHE_BASEDIR = "${env.WORKSPACE}"
+            CMAKE_BUILD_TYPE = 'Release'
+            QT_VERSION = "5.15.2"
+            QT_MKSPEC = "gcc_64"
+          }
+          steps {
+            sh 'export'
+            sh 'git submodule deinit -f .'
+            sh 'git clean -ff -x -d .'
+            sh 'git submodule update --init --recursive --force'
+            sh 'qmake ..'
+            sh 'make -j'nproc''
+          }
+          post {
+            cleanup {
+              sh 'git clean -ff -x -d .'
+            }
+          }
+        }
+
+        stage('Windows build (cmake)') {
+          environment {
+            CCACHE_BASEDIR = "${env.WORKSPACE}"
+            CMAKE_BUILD_TYPE = 'Release'
+            QT_VERSION = "5.15.2"
+            QT_MKSPEC = "gcc_64"
+          }
+          steps {
+            sh 'export'
+            sh 'git submodule deinit -f .'
+            sh 'git clean -ff -x -d .'
+            sh 'git submodule update --init --recursive --force'
+            sh 'cmake ..'
+            sh 'make -j'nproc''
+          }
+          post {
+            cleanup {
+              sh 'git clean -ff -x -d .'
+            }
+          }
+        }
+
       } // parallel
     } // stage('build')
   } // stages

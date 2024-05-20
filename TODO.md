@@ -1,4 +1,3 @@
 # TODO
 
-1. Windows Test
-2. Add QML modules
+1. Check CI/CD (Jenkins, Github workflows)

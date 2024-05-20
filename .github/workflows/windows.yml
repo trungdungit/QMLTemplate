@@ -1,4 +1,4 @@
-name: Linux
+name: Windows
 
 on:
   push:
@@ -16,19 +16,19 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: windows-latest
 
     strategy:
       matrix:
         BuildType: [Debug, Release]
 
-    env:
-      ARTIFACT: QMLTemplate-x86_64.AppImage
-      QT_VERSION: 5.15.2
-
     defaults:
       run:
-        shell: bash
+        shell: cmd
+
+    env:
+      QT_VERSION: 5.15.2
+      ARTIFACT: QMLTemplate-installer.exe
 
     steps:
       - name: Checkout repo
@@ -37,61 +37,43 @@ jobs:
           submodules: recursive
           fetch-tags: true
 
-      - name: Set up Cache
-        uses: hendrikmuhs/ccache-action@v1.2
-        if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-        with:
-          create-symlink: true
-          key: ${{ runner.os }}-${{ matrix.BuildType }}
-          restore-keys: ${{ runner.os }}-${{ matrix.BuildType }}
-          max-size: 1G
-          append-timestamp: false
-
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:
           version: ${{ env.QT_VERSION }}
           aqtversion: ==3.1.*
-          host: linux
+          host: windows
           target: desktop
+          arch: win64_msvc2019_64
           dir: ${{ runner.temp }}
           modules: qtcharts qtquick3d
           setup-python: true
           cache: ${{ github.ref == 'refs/heads/master' && github.event_name != 'pull_request' }}
 
       - name: Install Dependencies
-        run:  |
-              chmod a+x ./tools/setup/install-dependencies-debian.sh
-              ./tools/setup/install-dependencies-debian.sh
+        run: choco install --no-progress ninja -y
+
+      - name: Set up Visual Studio shell
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
 
       - name: Create build directory
-        run:  mkdir ${{ runner.temp }}/shadow_build_dir
+        run: mkdir ${{ runner.temp }}\shadow_build_dir
 
       - name: Configure
-        working-directory: ${{ runner.temp }}/shadow_build_dir
+        working-directory: ${{ runner.temp }}\shadow_build_dir
         run: cmake -S ${{ github.workspace }} -B . -G Ninja
               -DCMAKE_BUILD_TYPE=${{ matrix.BuildType }}
               -DQML_BUILD_TESTING=${{ matrix.BuildType == 'Debug' && 'ON' || 'OFF' }}
 
       - name: Build
-        working-directory: ${{ runner.temp }}/shadow_build_dir
+        working-directory: ${{ runner.temp }}\shadow_build_dir
         run: cmake --build . --target all --config ${{ matrix.BuildType }}
 
-      - name: Create AppImage
-        working-directory: ${{ runner.temp }}/shadow_build_dir
+      - name: Install
+        working-directory: ${{ runner.temp }}\shadow_build_dir
         run: cmake --install . --config ${{ matrix.BuildType }}
-
-      - name: Setup for unit tests
-        if: matrix.BuildType == 'Debug'
-        working-directory: ${{ runner.temp }}/shadow_build_dir
-        run: |
-              mkdir -p ~/.config/QtProject/
-              cp ${{ github.workspace }}/test/qtlogging.ini ~/.config/QtProject/
-              export QT_FATAL_WARNINGS=1
-      - name: Run unit tests
-        if: matrix.BuildType == 'Debug'
-        working-directory:  ${{ runner.temp }}/shadow_build_dir
-        run: xvfb-run -a ./${{ env.ARTIFACT }} --unittest
 
       - name: Upload Build File
         uses: ./.github/actions/upload

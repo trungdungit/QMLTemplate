@@ -25,3 +25,5 @@ Directory structure
 ```
 
 [TO-DO](TODO.md)
+
+[Fix cmake windows build](https://stackoverflow.com/questions/74020800/system-cannot-find-the-file-nmake-cmake-error-with-mingw)
