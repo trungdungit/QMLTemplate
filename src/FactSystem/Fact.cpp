@@ -13,6 +13,7 @@
 #include "QMLCorePlugin.h"
 
 #include <QQmlEngine>
+#include <QTime>
 
 static const char* kMissingMetadata = "Meta data pointer missing";
 
