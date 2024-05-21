@@ -2,8 +2,8 @@ find_package(Qt5 REQUIRED COMPONENTS Core Qml)
 
 add_library(QmlControls STATIC
     	QmlPalette.cpp
-	QmlGlobal.cpp
-	QmlObjectListModel.cpp
+		QmlGlobal.cpp
+		QmlObjectListModel.cpp
 )
 
 target_link_libraries(QmlControls

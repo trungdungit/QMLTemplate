@@ -8,14 +8,14 @@
  ****************************************************************************/
 
 
-#include "QML.h"
+#include "QMLUtilities.h"
 
 #include <qmath.h>
 #include <float.h>
 #include <QDateTime>
 #include <QtGlobal>
 
-namespace QML
+namespace QMLUtilities
 {
 
 static quint64 gBootTime = 0;

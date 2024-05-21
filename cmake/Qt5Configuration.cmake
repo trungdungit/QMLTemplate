@@ -6,10 +6,10 @@ if(NOT QT_VERSION)
 	# if QT version not specified then use any available version
 	file(GLOB FOUND_QT_VERSIONS
 		LIST_DIRECTORIES true
-		$ENV{HOME}/Qt/5.12.*
-		$ENV{HOME}/Qt/5.14.*
-		$ENV{HOME}/Qt/5.15.*
-		$ENV{HOME}/Qt/6.6.*
+		$ENV{HOME}/Setups/Qt/5.12.*
+		$ENV{HOME}/Setups/Qt/5.14.*
+		$ENV{HOME}/Setups/Qt/5.15.*
+		$ENV{HOME}/Setups/Qt/6.6.*
 	)
 	if(NOT FOUND_QT_VERSIONS)
 		return()
@@ -34,18 +34,17 @@ if(NOT QT_MKSPEC)
 	endif()
 endif()
 
-set(QT_LIBRARY_HINTS
-	$ENV{QT_PATH}/${QT_VERSION}/${QT_MKSPEC}
-	${Qt5_DIR}
-)
+set(QT_LIBRARY_HINTS ${Qt5_DIR})
 
 if(ANDROID)
 	list(APPEND QT_LIBRARY_HINTS ${QT_HOST_PATH}/lib/cmake)
 elseif(WIN32)
-	list(APPEND QT_LIBRARY_HINTS C:/Qt/${QT_VERSION}/${QT_MKSPEC})
+	list(APPEND QT_LIBRARY_HINTS D:/Qt/${QT_VERSION}/${QT_MKSPEC})
 elseif(LINUX)
-	list(APPEND QT_LIBRARY_HINTS $ENV{HOME}/Qt/${QT_VERSION}/${QT_MKSPEC})
+	list(APPEND QT_LIBRARY_HINTS $ENV{HOME}/Setups/Qt/${QT_VERSION}/${QT_MKSPEC})
 endif()
 
 include(CMakePrintHelpers)
-cmake_print_variables(QT_VERSION QT_MKSPEC QT_LIBRARY_HINTS)
+cmake_print_variables(QT_VERSION)
+cmake_print_variables(QT_MKSPEC)
+cmake_print_variables(QT_LIBRARY_HINTS)

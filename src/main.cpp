@@ -4,7 +4,7 @@
 #include <QQuickWindow>
 
 #include "QMLApplication.h"
-#include "QML.h"
+#include "QMLUtilities.h"
 #include "RunGuard.h"
 
 #ifdef UNITTEST_BUILD
@@ -22,10 +22,8 @@
 
 /// @brief CRT Report Hook installed using _CrtSetReportHook. We install this hook when
 /// we don't want asserts to pop a dialog on windows.
-int WindowsCrtReportHook(int reportType, char* message, int* returnValue)
+int WindowsCrtReportHook(int /*reportType*/, char* message, int* returnValue)
 {
-    Q_UNUSED(reportType);
-
     qFatal("%s", message);              // Output message to stderr
     *returnValue = 0;                   // Don't break into debugger
     return true;                        // We handled this fully ourselves
@@ -41,7 +39,7 @@ void sigHandler(int s)
 {
     std::signal(s, SIG_DFL);
     if (qmlApp()) {
-        qmlApp()->mainRootWindow()->close();
+        qmlApp()->mainWindow()->close();
         QEvent event{QEvent::Quit};
         qmlApp()->event(&event);
     }
@@ -60,6 +58,7 @@ void sigHandler(int s)
 
 int main(int argc, char *argv[])
 {
+    qDebug() << "Start app successfully";
 #ifndef __mobile__
     // We make the runguard key different for custom and non custom
     // builds, so they can be executed together in the same device.
@@ -79,7 +78,7 @@ int main(int argc, char *argv[])
     }
 #endif
     // Record boot timer
-    QML::initTimer();
+    QMLUtilities::initTimer();
 
 #ifdef Q_OS_MAC
 #ifndef Q_OS_IOS
@@ -172,7 +171,7 @@ int main(int argc, char *argv[])
 
 #ifdef UNITTEST_BUILD
     if (runUnitTests) {
-        exitCode = runTests(stressUnitTests, unitTestOptions);
+        exitCode = UnitTestList::runTests(stressUnitTests, unitTestOptions);
     } else
 #endif
     {
@@ -188,6 +187,6 @@ int main(int argc, char *argv[])
     }
 
     app->_shutdown();
-    qDebug() << "Exit app";
+    qDebug() << "Exit app successfully";
     return exitCode;
 }

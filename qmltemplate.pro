@@ -7,8 +7,8 @@ exists($${OUT_PWD}/qmltemplate.pro) {
 message(Qt version $$[QT_VERSION])
 
 !contains(CONFIG, DISABLE_QT_VERSION_CHECK) {
-    !versionAtLeast(QT_VERSION, 5.15.2) {
-        error("Qt version 5.15.2 or newer required. Found $$QT_VERSION")
+    !versionAtLeast(QT_VERSION, 5.12.0) {
+        error("Qt version 5.12.0 or newer required. Found $$QT_VERSION")
     }
 }
 
@@ -29,20 +29,25 @@ LinuxBuild {
     }
 }
 
-WindowsBuild {
-}
-
 QML_APP_NAME        = "QMLTemplate"
 QML_ORG_NAME        = "QMLTemplate.org"
 QML_ORG_DOMAIN      = "org.qmltemplate"
 QML_APP_DESCRIPTION = ""
 QML_APP_COPYRIGHT   = ""
 
-iOSBuild {
-}
-
 LinuxBuild {
     CONFIG += link_pkgconfig
+}
+
+WindowsBuild {
+    RC_ICONS = resources/icons/sample.ico
+    CONFIG += resources_big
+}
+
+DebugBuild {
+!iOSBuild {
+    CONFIG += console
+}
 }
 
 # Qt configuration
@@ -127,28 +132,28 @@ INCLUDEPATH += \
 
 HEADERS += \
     src/Utilities/JsonHelper.h \
-    src/Utilities/QML.h \
+    src/Utilities/QMLUtilities.h \
     src/Utilities/QMLLoggingCategory.h \
 
 SOURCES += \
     src/Utilities/JsonHelper.cpp \
-    src/Utilities/QML.cpp \
+    src/Utilities/QMLUtilities.cpp \
     src/Utilities/QMLLoggingCategory.cpp \
 
-# QMLControls
+# QmlControls
 
 INCLUDEPATH += \
-    src/QMLControls \
+    src/QmlControls \
 
 HEADERS += \
-    src/QMLControls/QmlGlobal.h \
-    src/QMLControls/QmlObjectListModel.h \
-    src/QMLControls/QmlPalette.h \
+    src/QmlControls/QmlGlobal.h \
+    src/QmlControls/QmlObjectListModel.h \
+    src/QmlControls/QmlPalette.h \
 
 SOURCES += \
-    src/QMLControls/QmlGlobal.cpp \
-    src/QMLControls/QmlObjectListModel.cpp \
-    src/QMLControls/QmlPalette.cpp \
+    src/QmlControls/QmlGlobal.cpp \
+    src/QmlControls/QmlObjectListModel.cpp \
+    src/QmlControls/QmlPalette.cpp \
 
 #
 # Main
@@ -180,24 +185,23 @@ SOURCES += \
     src/RunGuard.cpp \
 
 
-#-------------------------------------------------------------------------------------
 #
 # Localization
 #
 
 TRANSLATIONS += $$files($$PWD/translations/qml*.ts)
-CONFIG+=lrelease embed_translations
-
-WindowsBuild {
-    PRECOMPILED_HEADER += src/pch.h
-    HEADERS += src/pch.h
-    CONFIG -= silent
-}
+CONFIG += lrelease embed_translations
 
 #
 # Steps for "install" target on Linux
 #
 LinuxBuild {
+    target.path = $${PREFIX}/bin/
+    INSTALLS += target
 }
+
+#
+# Test modules
+#
 
 include(test/QMLTest.pri)

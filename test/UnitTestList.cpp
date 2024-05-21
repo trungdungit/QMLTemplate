@@ -4,6 +4,8 @@
 #include "DeviceManagerTest.h"
 #include "MainWindowTest.h"
 
+namespace UnitTestList
+{
 int runTests(bool stress, QStringView unitTestOptions)
 {
     UT_REGISTER_TEST(DeviceManagerTest)
@@ -25,4 +27,5 @@ int runTests(bool stress, QStringView unitTestOptions)
     }
 
     return result;
+}
 }

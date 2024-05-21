@@ -11,7 +11,7 @@
 
 #include <QThread>
 
-namespace QML
+namespace QMLUtilities
 {
 
 /**

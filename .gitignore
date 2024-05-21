@@ -3,7 +3,6 @@
 .cache/
 cmake-build-*/
 out/
-libs/lib/Frameworks/GStreamer.framework
 *_qmlcache.qrc
 *.swp
 *.nfs
@@ -26,8 +25,8 @@ qrc_*.cpp
 tmp
 debug
 release
-/qgroundcontrol
-qgroundcontrol.xcodeproj/**
+/QMLTemplate
+QMLTemplate.xcodeproj/**
 doc/html
 doc/doxy.log
 controller_log*
@@ -51,13 +50,8 @@ user_config.pri
 *.suo
 *.uhf.txt
 *.opensdf
-thirdParty/qserialport-build-desktop/
-thirdParty/qserialport/bin/
-thirdParty/qserialport/lib/
-libs/thirdParty/libxbee/lib/
 GeneratedFiles/
-gstreamer-1.0-android*
-localization/qgroundcontrol/
+localization/QDTTemplate/
 
 *.autosave
 .settings/

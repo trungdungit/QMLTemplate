@@ -270,17 +270,18 @@ ReleaseBuild {
     }
 
     WindowsBuild {
-        # Run compilation using VS compiler using multiple threads
-        QMAKE_CXXFLAGS += -MP
+        QMAKE_CXXFLAGS += -ffat-lto-objects
+    #   # Run compilation using VS compiler using multiple threads
+    #   QMAKE_CXXFLAGS += -MP
 
-        # Enable function level linking and enhanced optimized debugging
-        QMAKE_CFLAGS_RELEASE   += /Gy /Zo
-        QMAKE_CXXFLAGS_RELEASE += /Gy /Zo
-        QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO   += /Gy /Zo
-        QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += /Gy /Zo
+    #   # Enable function level linking and enhanced optimized debugging
+    #   QMAKE_CFLAGS_RELEASE   += /Gy /Zo
+    #   QMAKE_CXXFLAGS_RELEASE += /Gy /Zo
+    #   QMAKE_CFLAGS_RELEASE_WITH_DEBUGINFO   += /Gy /Zo
+    #   QMAKE_CXXFLAGS_RELEASE_WITH_DEBUGINFO += /Gy /Zo
 
-        # Eliminate duplicate COMDATs
-        QMAKE_LFLAGS_RELEASE += /OPT:ICF
-        QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO += /OPT:ICF
+    #   # Eliminate duplicate COMDATs
+    #   QMAKE_LFLAGS_RELEASE += /OPT:ICF
+    #   QMAKE_LFLAGS_RELEASE_WITH_DEBUGINFO += /OPT:ICF
     }
 }

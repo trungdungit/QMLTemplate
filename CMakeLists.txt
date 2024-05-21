@@ -1,14 +1,26 @@
-cmake_minimum_required(VERSION 3.16.1 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.10.1 FATAL_ERROR)
 
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug;Release")
 if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release CACHE STRING "Build type" FORCE)
 endif()
 
-find_program(CCACHE_PROGRAM ccache)
-if(CCACHE_PROGRAM)
-    set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
-    set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+if(UNIX)
+    find_program(CCACHE_PROGRAM ccache)
+    message(STATUS "Using ccache")
+    if(CCACHE_PROGRAM)
+        set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+        set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+    endif()
+elseif(WIN32)
+    if(SCCACHE_PROGRAM)
+        message(STATUS "Using sccache")
+        set(CMAKE_C_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+        set(CMAKE_CXX_COMPILER_LAUNCHER ${CCACHE_PROGRAM})
+        if(MSVC)
+            string(APPEND CMAKE_CXX_FLAGS " /FS")
+        endif()
+    endif()
 endif()
 
 #######################################################
@@ -78,7 +90,7 @@ cmake_print_variables(CMAKE_TOOLCHAIN_FILE)
 include(Qt5Configuration)
 
 set(QT_QML_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/qml" CACHE PATH "Install path for QML" FORCE)
-# set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/qml ${CMAKE_BINARY_DIR}/imports CACHE STRING "Extra QML Import Paths" FORCE)
+set(QML_IMPORT_PATH ${CMAKE_SOURCE_DIR}/UI CACHE STRING "Extra QML import paths" FORCE)
 add_compile_definitions(QT_DISABLE_DEPRECATED_UP_TO=0x050F00)
 
 if(CMAKE_BUILD_TYPE STREQUAL "Release")
@@ -125,9 +137,9 @@ find_package(Qt5
         Quick
         QuickControls2
         QuickWidgets
-        OpenGL
         Test
         Widgets
+        LinguistTools
     HINTS
         ${QT_LIBRARY_HINTS}
 )
@@ -160,6 +172,9 @@ if(QML_BUILD_TESTING)
     list(APPEND QML_RESOURCES ${CMAKE_SOURCE_DIR}/test/UnitTest.qrc)
 endif()
 
+if(WIN32)
+    list(APPEND QML_RESOURCES ${CMAKE_SOURCE_DIR}/deploy/windows/sample.rc)
+endif()
 
 #######################################################
 #               QMLTemplate Target
@@ -170,17 +185,22 @@ add_executable(${PROJECT_NAME}
     ${QML_RESOURCES}
 )
 
-#if(Qt5LinguistTools_FOUND)
-    #file(GLOB TS_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/translations/qml_*.ts)
-    #qt5_add_translations(${PROJECT_NAME} TS_FILES ${TS_SOURCES}) # TODO: Update to new qt_add_translations form in Qt5
-#endif()
+#######################################################
+#               Translations
+#######################################################   
+file(GLOB TS_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/translations/qml*.ts)
+QT5_ADD_TRANSLATION(${PROJECT_NAME} ${TS_SOURCES})
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE src/pch.h)
 
 set_target_properties(${PROJECT_NAME} PROPERTIES QT_RESOURCE_PREFIX "/qml")
 
 if(WIN32)
-    set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
+    set_target_properties(${PROJECT_NAME} 
+        PROPERTIES 
+            WIN32_EXECUTABLE TRUE
+            QT_TARGET_RC_ICONS "${CMAKE_SOURCE_DIR}/deploy/windows/sample.ico"
+    )
     add_compile_definitions(_USE_MATH_DEFINES)
 elseif(MACOS)
     set_target_properties(${PROJECT_NAME}
@@ -233,7 +253,15 @@ add_compile_definitions(
 
 add_subdirectory(src)
 add_subdirectory(UI)
-target_link_libraries(${PROJECT_NAME} PRIVATE qml)
+target_link_libraries(${PROJECT_NAME} 
+    PRIVATE
+        Qt5::Core
+        Qt5::Quick
+        Qt5::Widgets
+        qml
+        QmlControls
+        Utilities
+)
 if(QML_BUILD_TESTING)
     add_subdirectory(test)
     target_link_libraries(${PROJECT_NAME} PRIVATE qmltest)

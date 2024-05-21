@@ -19,7 +19,7 @@ add_library(${PROJECT_NAME} STATIC
 add_subdirectory(DeviceManager)
 add_subdirectory(FactSystem)
 add_subdirectory(api)
-add_subdirectory(QMLControls)
+add_subdirectory(QmlControls)
 add_subdirectory(Settings)
 add_subdirectory(Utilities)
 

@@ -11,7 +11,7 @@
 #include "QMLApplication.h"
 #include "AppSettings.h"
 #include "SettingsManager.h"
-#include "QML.h"
+#include "QMLUtilities.h"
 
 
 UnitTest::UnitTest(void)

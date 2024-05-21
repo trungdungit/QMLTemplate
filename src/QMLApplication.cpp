@@ -140,12 +140,12 @@ void QMLApplication::_checkForNewVersion()
     }
 }
 
-QQuickWindow* QMLApplication::mainRootWindow()
+QQuickWindow* QMLApplication::mainWindow()
 {
-    if(!_mainRootWindow) {
-        _mainRootWindow = qobject_cast<QQuickWindow*>(_rootQmlObject());
+    if(!_mainWindow) {
+        _mainWindow = qobject_cast<QQuickWindow*>(_rootQmlObject());
     }
-    return _mainRootWindow;
+    return _mainWindow;
 }
 
 

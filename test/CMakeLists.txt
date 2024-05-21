@@ -27,16 +27,15 @@ add_qml_test(DeviceManagerTest)
 add_qml_test(MainWindowTest)
 
 add_library(qmltest
-        STATIC
-            UnitTestList.cpp
+    STATIC
+        UnitTestList.cpp
 	    UnitTest.qrc
 )
 
 target_link_libraries(qmltest
 	PUBLIC
-            DeviceManagerTest
-            qmlunittest
-        PUBLIC
+        DeviceManagerTest
+        qmlunittest
 	    Qt5::Core
 )
 

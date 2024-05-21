@@ -44,7 +44,7 @@ public:
 
     QTranslator& qmlJSONTranslator(void) { return _qmlTranslatorJSON; }
 
-    QQuickWindow*   mainRootWindow();
+    QQuickWindow*   mainWindow();
 
     bool event(QEvent *e) override;
 
@@ -92,7 +92,7 @@ private:
     bool                _logOutput;
     QQmlApplicationEngine* _qmlAppEngine        = nullptr;
     QMLToolbox*         _toolbox                = nullptr;
-    QQuickWindow*       _mainRootWindow         = nullptr;
+    QQuickWindow*       _mainWindow             = nullptr;
     QLocale             _locale;
     QTranslator         _qmlTranslatorJSON;
     bool                _error                  = false;

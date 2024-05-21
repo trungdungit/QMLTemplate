@@ -106,7 +106,7 @@ QQmlApplicationEngine* QMLCorePlugin::createQmlApplicationEngine(QObject* parent
 
 void QMLCorePlugin::createRootWindow(QQmlApplicationEngine* qmlEngine)
 {
-    qmlEngine->load(QUrl(QStringLiteral("qrc:/qml/MainRootWindow.qml")));
+    qmlEngine->load(QUrl(QStringLiteral("qrc:/qml/MainWindow.qml")));
 }
 
 void QMLCorePlugin::paletteOverride(QString /*colorName*/, QMLPalette::PaletteColorInfo_t& /*colorInfo*/)

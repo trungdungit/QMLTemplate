@@ -2,7 +2,7 @@ find_package(Qt5 REQUIRED COMPONENTS Core Network Positioning Qml)
 
 add_library(Utilities STATIC
     JsonHelper.cpp
-    QML.cpp
+    QMLUtilities.cpp
     QMLLoggingCategory.cpp
 )
 
@@ -10,13 +10,9 @@ if(MOBILE)
 	target_sources(Utilities
 		PRIVATE
 			MobileScreenMgr.cpp
-        		MobileScreenMgr.h
+			MobileScreenMgr.h
 	)
 endif()
-
-set(BUILD_SHAPELIB_CONTRIB OFF CACHE INTERNAL "")
-set(BUILD_SHARED_LIBS OFF CACHE INTERNAL "")
-set(BUILD_TESTING OFF CACHE INTERNAL "")
 
 target_link_libraries(Utilities
 	PRIVATE
@@ -28,7 +24,4 @@ target_link_libraries(Utilities
 		Qt5::Network
 )
 
-target_include_directories(Utilities
-	PUBLIC
-		${CMAKE_CURRENT_SOURCE_DIR}
-)
+target_include_directories(Utilities PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

@@ -1,8 +1,5 @@
 import QtQuick          2.11
 import QtQuick.Controls 2.4
-import QtQuick.Dialogs  1.3
-import QtQuick.Layouts  1.11
-import QtQuick.Window   2.11
 
 import QMLTemplate 1.0
 import QMLTemplate.ScreenTools 1.0
@@ -23,6 +20,6 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        console.log(QMLTemplate.settingsManager.appSettings.appName.rawValue)
+        console.log("Name = " + QMLTemplate.settingsManager.appSettings.appName.rawValue)
     }
 }

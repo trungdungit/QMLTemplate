@@ -26,7 +26,7 @@ void MainWindowTest::showWindow_test()
     char *argv[] = {(char*)"/"};
 
     QApplication app(argc, argv);
-    const QUrl url(QStringLiteral("qrc:/qml/MainRootWindow.qml"));
+    const QUrl url(QStringLiteral("qrc:/qml/MainWindow.qml"));
     QObject::connect(
         qmlEngine,
         &QQmlApplicationEngine::objectCreated,
