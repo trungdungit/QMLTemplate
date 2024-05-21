@@ -1,5 +1,5 @@
 #pragma once
 
-#include <QLoggingCategory>
+#include <QStringView>
 
 int runTests(bool stress, QStringView unitTestOptions);

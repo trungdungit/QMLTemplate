@@ -2,28 +2,47 @@
 
 *QMLTemplate* is template for QML application
 
+## Directory structure
 ```
-Directory structure
-
 +---cmake
-|   |   Git.cmake
-|   |   Qt5Configuration.cmake
+|   |   Git.cmake                   # CMake contains Git information
+|   |   Qt5Configuration.cmake      # CMake contains Qt information
 |   \
-|---config
+|---config                          # Json config
 |---deploy
-|   |   docker
-|   |   jenkins
+|   |   docker                      # Dockerfile
+|   |   jenkins                     # Jenkinsfile
 |   |   linux
+|   |   windows
 |   \
-|---libs
-|---resources
-|---src
-|---test
+|---libs                            # Submodule or 3rdParty
+|---resources                       # Image, icon, font, ...
+|---src                             # Main source
+|---test                            # Test module
 |---tools
-|---translations
-|---UI
+|---translations                    # Qt translation .ts file
+|---UI                              # QML file
 ```
 
-[TO-DO](TODO.md)
+## How to run
 
-[Fix cmake windows build](https://stackoverflow.com/questions/74020800/system-cannot-find-the-file-nmake-cmake-error-with-mingw)
+### Build source (Qt)
+```
+qmake ../qmltemplate.pro
+make -j
+```
+
+### Build source (CMake, Ubuntu)
+```
+cmake -DQt5_DIR=$$PWD/Qt/5.15.2/gcc_64/lib/cmake/Qt5 -DQDT_BUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug ..
+make -j
+```
+
+### Build source (CMake, Windows)
+```
+cmake -DQt5_DIR=$$PWD/Qt/5.15.2/gcc_64/lib/cmake/Qt5 -DQDT_BUILD_TESTING=ON -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CC_COMPILER=gcc -DCMAKE_MAKE_PROGRAM=mingw32-make -G "MinGW Makefiles" ..
+make -j
+```
+
+## TODO
+[TODO](TODO.md)

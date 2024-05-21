@@ -5,15 +5,15 @@
 [
 {
     "name":             "appName",
-    "shortDesc": 	"appName",
+    "shortDesc": 	 "appName",
     "type":             "string",
-    "default":     	"Template Project"
+    "default":     	 "Template Project"
 },
 {
     "name":             "darkTheme",
-    "shortDesc": 	"darkTheme",
+    "shortDesc": 	 "darkTheme",
     "type":             "bool",
-    "default":     	"true"
+    "default":     	 "true"
 }
 ]
 }

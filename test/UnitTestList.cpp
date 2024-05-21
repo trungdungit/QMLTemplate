@@ -1,6 +1,5 @@
 #include "UnitTestList.h"
 #include "UnitTest.h"
-#include "QMLApplication.h"
 
 #include "DeviceManagerTest.h"
 #include "MainWindowTest.h"

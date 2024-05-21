@@ -18,7 +18,6 @@
 #ifdef Q_OS_WIN
 
 #include <windows.h>
-#include <iostream>
 #include <crtdbg.h>
 
 /// @brief CRT Report Hook installed using _CrtSetReportHook. We install this hook when
@@ -27,7 +26,7 @@ int WindowsCrtReportHook(int reportType, char* message, int* returnValue)
 {
     Q_UNUSED(reportType);
 
-    std::cerr << message << std::endl;  // Output message to stderr
+    qFatal("%s", message);              // Output message to stderr
     *returnValue = 0;                   // Don't break into debugger
     return true;                        // We handled this fully ourselves
 }
@@ -41,9 +40,11 @@ int WindowsCrtReportHook(int reportType, char* message, int* returnValue)
 void sigHandler(int s)
 {
     std::signal(s, SIG_DFL);
-    qmlApp()->mainRootWindow()->close();
-    QEvent event{QEvent::Quit};
-    qmlApp()->event(&event);
+    if (qmlApp()) {
+        qmlApp()->mainRootWindow()->close();
+        QEvent event{QEvent::Quit};
+        qmlApp()->event(&event);
+    }
 }
 
 #endif /* Q_OS_LINUX */
@@ -84,7 +85,7 @@ int main(int argc, char *argv[])
 #ifndef Q_OS_IOS
     // Prevent Apple's app nap from screwing us over
     // tip: the domain can be cross-checked on the command line with <defaults domains>
-    QProcess::execute("defaults", {"write org.qgroundcontrol.qgroundcontrol NSAppSleepDisabled -bool YES"});
+    QProcess::execute("defaults", {"write org.template.template NSAppSleepDisabled -bool YES"});
 #endif
 #endif
 
@@ -136,13 +137,10 @@ int main(int argc, char *argv[])
         runUnitTests = true;
     }
 
+#ifdef Q_OS_WIN
     if (quietWindowsAsserts) {
-#ifdef Q_OS_WIN
         _CrtSetReportHook(WindowsCrtReportHook);
-#endif
     }
-
-#ifdef Q_OS_WIN
     if (runUnitTests) {
         // Don't pop up Windows Error Reporting dialog when app crashes. This prevents TeamCity from
         // hanging.
@@ -190,6 +188,6 @@ int main(int argc, char *argv[])
     }
 
     app->_shutdown();
-    qDebug() << "After app delete";
+    qDebug() << "Exit app";
     return exitCode;
 }

@@ -6,6 +6,7 @@ import QtQuick.Window   2.11
 
 import QMLTemplate 1.0
 import QMLTemplate.ScreenTools 1.0
+import QMLTemplate.SettingsManager 1.0
 
 /// @brief Native QML top level window
 /// All properties defined here are visible to all QML pages.
@@ -22,6 +23,6 @@ ApplicationWindow {
     }
 
     Component.onCompleted: {
-        console.log("Main Window")
+        console.log(QMLTemplate.settingsManager.appSettings.appName.rawValue)
     }
 }
