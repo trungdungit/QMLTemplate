@@ -21,20 +21,17 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends instal
 	rsync \
     binutils \
     locales \
-    patchelf
+    patchelf \
+	vim \
 
 #Qt Required
 DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
 	libxcb-xinerama0 \
     libxkbcommon-x11-0 \
-    libxcb-cursor0
-
-DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
-	libsdl2-dev \
-	libspeechd2 \
-	flite \
-	speech-dispatcher \
-	speech-dispatcher-flite
+    libxcb-cursor0 \
+	libxcb-keysyms1 \
+	libxcb-icccm4 \
+	libxcb-shape0 \
 
 #GStreamer
 DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
