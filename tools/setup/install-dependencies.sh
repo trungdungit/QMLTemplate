@@ -23,6 +23,9 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends instal
     locales \
     patchelf \
 	vim \
+	mesa-common-dev \
+	libglu1-mesa-dev \
+	libdbus-1-3 \
 
 #Qt Required
 DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
@@ -32,6 +35,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
 	libxcb-keysyms1 \
 	libxcb-icccm4 \
 	libxcb-shape0 \
+	libxcb-randr0-dev \
 
 #GStreamer
 DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \

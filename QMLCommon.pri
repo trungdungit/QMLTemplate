@@ -244,13 +244,6 @@ CONFIG(debug, debug|release) {
     RCC_DIR      = $${OUT_PWD}/rcc
 }
 
-SOURCE_DIR = $$IN_PWD
-
-LANGUAGE = C++
-
-# Turn off serial port warnings
-DEFINES += _TTY_NOWARN_
-
 MacBuild {
     QMAKE_TARGET_BUNDLE_PREFIX =    org.qmltemplate
     QMAKE_BUNDLE =                  qmltemplate

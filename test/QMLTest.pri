@@ -7,9 +7,9 @@ ReleaseBuild {
     DEFINES += UNITTEST_BUILD
 
     INCLUDEPATH += \
+        $$PWD \
         $$PWD/DeviceManager \
         $$PWD/qmlunittest \
-        $$PWD \
 
     HEADERS += \
         $$PWD/DeviceManager/DeviceManagerTest.h \

@@ -10,16 +10,20 @@ MainWindowTest::MainWindowTest()
 void MainWindowTest::init()
 {
     UnitTest::init();
+    qmlEngine = new QQmlApplicationEngine(nullptr);
+    Q_CHECK_PTR(qmlEngine);
 }
 
 void MainWindowTest::cleanup()
 {
+    if (qmlEngine != nullptr) {
+        qmlEngine = nullptr;
+    }
     UnitTest::cleanup();
 }
 
 void MainWindowTest::showWindow_test()
 {
-    QQmlApplicationEngine* qmlEngine = new QQmlApplicationEngine(nullptr);
     qmlEngine->addImportPath("qrc:/qml");
 
     int argc = 1;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "UnitTest.h"
+#include <QQmlApplicationEngine>
 
 class MainWindowTest : public UnitTest {
     Q_OBJECT
@@ -13,5 +14,8 @@ protected:
 
 private slots:
     void showWindow_test();
+
+private:
+    QQmlApplicationEngine* qmlEngine;
 };
 

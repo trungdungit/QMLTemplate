@@ -751,7 +751,7 @@ bool Fact::volatileValue(void) const
     }
 }
 
-void Fact::_setIgnoreQMLRebootRequired(bool ignore)
+void Fact::_setIgnoreQMLRebootRequired(bool /*ignore*/)
 {
 
 }

@@ -17,10 +17,10 @@ int runTests(bool stress, QStringView unitTestOptions)
         // Run the test
         const int failures = UnitTest::run(unitTestOptions);
         if (failures == 0) {
-            qDebug() << "ALL TESTS PASSED";
+            qDebug() << "All tests passed";
             result = 0;
         } else {
-            qDebug() << failures << " TESTS FAILED!";
+            qDebug() << failures << " tests failed!";
             result = -failures;
             break;
         }

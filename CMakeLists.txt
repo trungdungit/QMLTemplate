@@ -188,7 +188,7 @@ add_executable(${PROJECT_NAME}
 #######################################################
 #               Translations
 #######################################################   
-file(GLOB TS_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/translations/qml*.ts)
+file(GLOB TS_SOURCES RELATIVE ${CMAKE_SOURCE_DIR} ${CMAKE_SOURCE_DIR}/translations/qml_*.ts)
 QT5_ADD_TRANSLATION(${PROJECT_NAME} ${TS_SOURCES})
 
 target_precompile_headers(${PROJECT_NAME} PRIVATE src/pch.h)

@@ -189,7 +189,7 @@ SOURCES += \
 # Localization
 #
 
-TRANSLATIONS += $$files($$PWD/translations/qml*.ts)
+TRANSLATIONS += $$files($$PWD/translations/qml_*.ts)
 CONFIG += lrelease embed_translations
 
 #
@@ -203,5 +203,4 @@ LinuxBuild {
 #
 # Test modules
 #
-
 include(test/QMLTest.pri)

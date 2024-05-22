@@ -64,17 +64,13 @@ int FactValueSliderListModel::resetInitialValue(void)
     return _initialValueIndex;
 }
 
-int FactValueSliderListModel::rowCount(const QModelIndex& parent) const
+int FactValueSliderListModel::rowCount(const QModelIndex& /*parent*/) const
 {
-    Q_UNUSED(parent);
-    
     return _cValues;
 }
 
 QVariant FactValueSliderListModel::data(const QModelIndex &index, int role) const
 {
-    Q_UNUSED(role);
-
     if (!index.isValid()) {
         return QVariant();
     }
@@ -98,8 +94,6 @@ QVariant FactValueSliderListModel::data(const QModelIndex &index, int role) cons
     } else {
         return QVariant();
     }
-
-
 }
 
 QHash<int, QByteArray> FactValueSliderListModel::roleNames(void) const

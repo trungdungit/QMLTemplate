@@ -7,6 +7,7 @@ LABEL authors="dungpt"
 ENV DEBIAN_FRONTEND noninteractive
 
 ENV QT_PATH /opt/Qt
+ENV QT_VERSION 5.15.2
 ENV QT_DESKTOP $QT_PATH/${QT_VERSION}/gcc_64
 
 ENV PATH /usr/lib/ccache:$QT_DESKTOP/bin:$PATH
@@ -24,7 +25,5 @@ RUN /tmp/qt/install-qt.sh
 # Reconfigure locale
 RUN locale-gen en_US.UTF-8 && dpkg-reconfigure locales
 
-WORKDIR /project/build
-# CMD cmake -S /project/source -B . -G Ninja -DCMAKE_BUILD_TYPE=Debug; \
-# 	cmake --build . --target all --config Debug ; \
-# 	cmake --install . --config Debug
+WORKDIR /usr/project
+COPY . /usr/project/

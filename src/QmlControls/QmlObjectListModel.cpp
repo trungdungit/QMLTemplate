@@ -41,10 +41,8 @@ QObject* QmlObjectListModel::get(int index)
     return _objectList[index];
 }
 
-int QmlObjectListModel::rowCount(const QModelIndex& parent) const
+int QmlObjectListModel::rowCount(const QModelIndex& /*parent*/) const
 {
-    Q_UNUSED(parent);
-    
     return _objectList.count();
 }
 
@@ -88,10 +86,8 @@ bool QmlObjectListModel::setData(const QModelIndex& index, const QVariant& value
     return false;
 }
 
-bool QmlObjectListModel::insertRows(int position, int rows, const QModelIndex& parent)
+bool QmlObjectListModel::insertRows(int position, int rows, const QModelIndex& /*parent*/)
 {
-    Q_UNUSED(parent);
-    
     if (position < 0 || position > _objectList.count() + 1) {
         qWarning() << "Invalid position position:count" << position << _objectList.count();
     }
@@ -104,10 +100,8 @@ bool QmlObjectListModel::insertRows(int position, int rows, const QModelIndex& p
     return true;
 }
 
-bool QmlObjectListModel::removeRows(int position, int rows, const QModelIndex& parent)
+bool QmlObjectListModel::removeRows(int position, int rows, const QModelIndex& /*parent*/)
 {
-    Q_UNUSED(parent);
-    
     if (position < 0 || position >= _objectList.count()) {
         qWarning() << "Invalid position position:count" << position << _objectList.count();
     } else if (position + rows > _objectList.count()) {

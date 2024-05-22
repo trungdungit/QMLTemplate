@@ -28,7 +28,8 @@
 
 ### Build source (Qt)
 ```
-qmake ../qmltemplate.pro
+qmake ../qmltemplate.pro -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug    #Linux
+qmake ../qmltemplate.pro -spec win32-g++ CONFIG+=debug CONFIG+=qml_debug    #Windows
 make -j
 ```
 
@@ -46,14 +47,15 @@ make -j
 
 ### Run on docker
 ```
-# Config Xauth (need to test further)
-xhost +local:docker
-xauth add ${HOST}:0 . $(xxd -l 16 -p /dev/urandom)
+# Config Xauth (If necessary)
 xauth list > .Xauthority
-xauth generate :0 . trusted
+xhost + # Disable access control
+sudo xhost +local:docker
+xauth generate ${DISPLAY} . trusted
 
+# Docker run
 docker build --file ./deploy/docker/Dockerfile -t template-qml-docker:1.0 .
-docker run -it --network=host --env DISPLAY=$DISPLAY --privileged --volume="$HOME/.Xauthority:/root/.Xauthority:rw" -v /tmp/.X11-unix:/tmp/.X11-unix --rm template-qml-docker:1.0 /bin/bash
+docker run -it --name qml-docker --network=host --env DISPLAY=$DISPLAY --privileged --volume="$HOME/.Xauthority:/root/.Xauthority:rw" -v /tmp/.X11-unix:/tmp/.X11-unix --rm template-qml-docker:1.0 /bin/bash
 ```
 
 ## TODO

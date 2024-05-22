@@ -51,7 +51,7 @@ user_config.pri
 *.uhf.txt
 *.opensdf
 GeneratedFiles/
-localization/QDTTemplate/
+localization/QMLTemplate/
 
 *.autosave
 .settings/

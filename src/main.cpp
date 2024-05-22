@@ -100,20 +100,14 @@ int main(int argc, char *argv[])
             break;
         }
     }
+    // In Windows, the compiler doesn't see the use of the class created by Q_IMPORT_PLUGIN
+#pragma warning( disable : 4930 4101 )
 #endif
 
 #ifdef Q_OS_LINUX
     std::signal(SIGINT, sigHandler);
     std::signal(SIGTERM, sigHandler);
 #endif /* Q_OS_LINUX */
-
-// We statically link our own QtLocation plugin
-
-#ifdef Q_OS_WIN
-    // In Windows, the compiler doesn't see the use of the class created by Q_IMPORT_PLUGIN
-#pragma warning( disable : 4930 4101 )
-#endif
-
     bool runUnitTests = false;          // Run unit tests
 
 #ifdef QT_DEBUG
@@ -184,9 +178,10 @@ int main(int argc, char *argv[])
             return -1;
         }
         exitCode = app->exec();
+        app->_shutdown();
+        delete app;
     }
 
-    app->_shutdown();
     qDebug() << "Exit app successfully";
     return exitCode;
 }
