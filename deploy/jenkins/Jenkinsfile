@@ -1,75 +1,90 @@
 pipeline {
-    agent none
+    agent {
+        label 'default'
+    }
     stages {
-        parellel {
-            stage('Linux Debug (qmake)') {
-                environment {
-                    CMAKE_BUILD_TYPE = 'Debug'
-                    QT_PATH = "/opt/Qt"
-                    QMAKE_VER = "5.15.2/gcc_64/bin/qmake"
+        stage('Build code') {
+            parallel {
+                stage('Linux Debug (qmake)') {
+                    environment {
+                        CMAKE_BUILD_TYPE = 'Debug'
+                        QT_PATH = "/opt/Qt"
+                        QMAKE_VER = "5.15.2/gcc_64/bin/qmake"
+                    }
+                    steps {
+                        sh 'export'
+                        sh 'cd build; ${QT_PATH}/${QMAKE_VER} -r ../qmltemplate.pro CONFIG+=${CMAKE_BUILD_TYPE} -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug'
+                        sh 'cd build; make -j3'
+                    }
                 }
-                steps {
-                    sh 'export'
-                    sh 'mkdir build; cd build; ${QT_PATH}/${QMAKE_VER} -r ../qmltemplate.pro CONFIG+=${CMAKE_BUILD_TYPE} -spec linux-g++ CONFIG+=debug CONFIG+=qml_debug'
-                    sh 'cd build; make -j`nproc --all`'
-                }
-            }
 
-            stage('Linux Debug (cmake)') {
-                environment {
-                    CMAKE_BUILD_TYPE = 'Debug'
+                stage('Linux Debug (cmake)') {
+                    environment {
+                        QT_PATH = "/opt/Qt"
+                        QT_VERSION="5.15.2"
+                        CMAKE_BUILD_TYPE = 'Debug'
+                    }
+                    steps {
+                        sh 'export'
+                        sh 'cd build; cmake .. -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_CXX_COMPILER=g++ -DQt5_DIR=${QT_PATH}/${QT_VERSION}/gcc_64/lib/cmake/Qt5'
+                        sh 'cd build; make -j3'
+                    }
                 }
-                steps {
-                    sh 'export'
-                    sh 'mkdir build; cd build; cmake .. -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}'
-                    sh 'cd build; make -j`nproc --all`'
-                }
-            }
 
-            stage('Linux Test (cmake)') {
-                environment {
-                    CMAKE_BUILD_TYPE = 'Debug'
-                }
-                steps {
-                    sh 'export'
-                    sh 'mkdir build; cd build; cmake .. -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DQML_BUILD_TESTING=ON'
-                    sh 'cd build; make -j`nproc --all`'
-                }
-            }
+                // stage('Windows build (qmake)') {
+                //     environment {
+                //         CMAKE_BUILD_TYPE = 'Debug'
+                //         QT_PATH = "D:/Qt"
+                //         QMAKE_VER = "5.15.2/gcc_64/bin/qmake"
+                //     }
+                //     steps {
+                //         sh 'export'
+                //         sh 'cd build; ${QT_PATH}/${QMAKE_VER} -r ../qmltemplate.pro CONFIG+=${CMAKE_BUILD_TYPE} -spec win32-g++ CONFIG+=debug CONFIG+=qml_debug'
+                //         sh 'mingw32-make -j`nproc --all`'
+                //     }
+                // }
 
-            stage('Windows build (qmake)') {
-                environment {
-                    CMAKE_BUILD_TYPE = 'Debug'
-                    QT_PATH = "D:/Qt"
-                    QMAKE_VER = "5.15.2/gcc_64/bin/qmake"
-                }
-                steps {
-                    sh 'export'
-                    sh 'mkdir build; cd build; ${QT_PATH}/${QMAKE_VER} -r ../qmltemplate.pro CONFIG+=${CMAKE_BUILD_TYPE} -spec win32-g++ CONFIG+=debug CONFIG+=qml_debug'
-                    sh 'mingw32-make -j`nproc --all`'
-                }
+                // stage('Windows build (cmake)') {
+                //     environment {
+                //         QT_PATH = "D:/Qt"
+                //         QT_VERSION="5.15.2"
+                //         CMAKE_BUILD_TYPE = 'Debug'
+                //     }
+                //     steps {
+                //         sh 'export'
+                //         sh 'cd build; cmake .. -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CC_COMPILER=gcc -DCMAKE_MAKE_PROGRAM=mingw32-make -G "MinGW Makefiles" -DQt5_DIR=${QT_PATH}/${QT_VERSION}/gcc_64/lib/cmake/Qt5'
+                //         sh 'mingw32-make -j`nproc --all`'
+                //     }
+                // }
             }
+        }
+        stage('Run test') {
+            parallel {
+                stage('Linux Test (cmake)') {
+                    environment {
+                        QT_PATH = "/opt/Qt"
+                        QT_VERSION="5.15.2"
+                        CMAKE_BUILD_TYPE = 'Debug'
+                    }
+                    steps {
+                        sh 'export'
+                        sh 'cd build; cmake .. -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_CXX_COMPILER=g++ -DQt5_DIR=${QT_PATH}/${QT_VERSION}/gcc_64/lib/cmake/Qt5 -DQML_BUILD_TESTING=ON'
+                        sh 'cd build; make -j3'
+                    }
+                }
 
-            stage('Windows build (cmake)') {
-                environment {
-                    CMAKE_BUILD_TYPE = 'Debug'
-                }
-                steps {
-                    sh 'export'
-                    sh 'mkdir build; cd build; cmake .. -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CC_COMPILER=gcc -DCMAKE_MAKE_PROGRAM=mingw32-make -G "MinGW Makefiles"'
-                    sh 'mingw32-make -j`nproc --all`'
-                }
-            }
-
-            stage('Windows test (cmake)') {
-                environment {
-                    CMAKE_BUILD_TYPE = 'Debug'
-                }
-                steps {
-                    sh 'export'
-                    sh 'mkdir build; cd build; cmake .. -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DQML_BUILD_TESTING=ON -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CC_COMPILER=gcc -DCMAKE_MAKE_PROGRAM=mingw32-make -G "MinGW Makefiles"'
-                    sh 'mingw32-make -j`nproc --all`'
-                }
+                // stage('Windows build (cmake)') {
+                //     environment {
+                //         QT_PATH = "D:/Qt"
+                //         QT_VERSION="5.15.2"
+                //         CMAKE_BUILD_TYPE = 'Debug'
+                //     }
+                //     steps {
+                //         sh 'export'
+                //         sh 'cd build; cmake .. -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CC_COMPILER=gcc -DCMAKE_MAKE_PROGRAM=mingw32-make -G "MinGW Makefiles" -DQt5_DIR=${QT_PATH}/${QT_VERSION}/gcc_64/lib/cmake/Qt5 -DQML_BUILD_TESTING=ON'
+                //         sh 'mingw32-make -j`nproc --all`'
+                //     }
+                // }
             }
         }
     }

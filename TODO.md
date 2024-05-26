@@ -6,5 +6,6 @@
 - [x] Docker build with UI
 - [x] Unit test
 - [ ] Develop on Android
-- [ ] Jenkins CI/CD
+- [x] Jenkins CI/CD on Linux
+- [ ] Jenkins CI/CD on Windows
 
