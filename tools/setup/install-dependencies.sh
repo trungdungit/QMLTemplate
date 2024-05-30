@@ -26,6 +26,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --quiet --no-install-recommends instal
 	mesa-common-dev \
 	libglu1-mesa-dev \
 	libdbus-1-3 \
+	fontconfig \
 
 #Qt Required
 DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
@@ -36,6 +37,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
 	libxcb-icccm4 \
 	libxcb-shape0 \
 	libxcb-randr0-dev \
+	libdrm-dev \
 
 #GStreamer
 DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
@@ -57,4 +59,3 @@ DEBIAN_FRONTEND=noninteractive apt-get -y --quiet install \
 	gstreamer1.0-gl \
 	gstreamer1.0-vaapi \
 	gstreamer1.0-rtsp \
-    libdrm-dev

@@ -48,8 +48,8 @@ make -j
 ### Run on docker
 ```
 # Config Xauth (If necessary)
-xauth list > .Xauthority
-xhost + # Disable access control
+xauth list      # choose port on bottom and set export DISPLAY=${bottom_result}
+xhost +         # Disable access control
 sudo xhost +local:docker
 xauth generate ${DISPLAY} . trusted
 
